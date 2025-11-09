@@ -4,6 +4,7 @@ import com.BackendMonkeytype.MonkeyType.DTO.UserDTO;
 import com.BackendMonkeytype.MonkeyType.model.User;
 import com.BackendMonkeytype.MonkeyType.repo.UserRepo;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -43,6 +44,10 @@ public class UserService {
         response.addCookie(cookie);
         return "cookie deleted";
 
+    }
+
+    public boolean verifyLogged(HttpServletRequest request){
+        return request.getUserPrincipal() != null;
     }
 
     public UserService(BCryptPasswordEncoder encoder) {

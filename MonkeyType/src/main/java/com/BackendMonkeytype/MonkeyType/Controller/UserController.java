@@ -36,4 +36,9 @@ public class UserController {
     public String LoggingOut(HttpServletResponse response){
         return userService.loggingOut(response);
     }
+
+    @GetMapping("/logged")
+    public boolean verifyingLogged(HttpServletRequest request){
+        return userService.verifyLogged(request);
+    }
 }

@@ -16,6 +16,9 @@ public class User {
     private String username;
     private String password;
 
+    @Column(unique = true)
+    private String email;
+
     @OneToMany(mappedBy = "user")
     private List<Score> scores;
 
@@ -27,6 +30,13 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public User(String fullname, String username, String password, String email) {
+        this.fullname = fullname;
+        this.username = username;
+        this.password = password;
+        this.email = email;
     }
 
     public User(String fullname, String username, String password, List<Score> scores) {
@@ -88,5 +98,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<Score> getScores() {
+        return scores;
+    }
+
+    public void setScores(List<Score> scores) {
+        this.scores = scores;
     }
 }
