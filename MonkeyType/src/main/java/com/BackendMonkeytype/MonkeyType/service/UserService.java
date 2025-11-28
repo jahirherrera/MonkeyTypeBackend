@@ -54,9 +54,19 @@ public class UserService {
         this.encoder = encoder;
     }
 
-    public User addUser(User user){
+    public String addUser(User user){
+
+        User username = userRepo.findByUsername(user.getUsername());
+
+        if (username != null) return "username already taken";
+
+        User email = userRepo.findByEmail(user.getEmail());
+
+        if (email != null) return "User with that email already created";
+
         user.setPassword(encoder.encode(user.getPassword()));
-        return userRepo.save(user);
+        userRepo.save(user);
+        return "success";
     }
 
     public User getUserbyUsername(String username){
@@ -65,6 +75,15 @@ public class UserService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void changePassword(UserDTO userDTO){
+        User user = userRepo.findByUsername(userDTO.getUsername());
+
+        String newpassword = encoder.encode(userDTO.getPassword());
+
+        user.setPassword(newpassword);
+        userRepo.save(user);
     }
 
     public String verify(User user, HttpServletResponse response) {

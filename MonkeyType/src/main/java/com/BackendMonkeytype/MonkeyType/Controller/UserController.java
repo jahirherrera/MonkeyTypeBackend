@@ -20,9 +20,10 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/addUser")
-    public User addUser(@RequestBody User user){
+    public String addUser(@RequestBody User user){
         return userService.addUser(user);
     }
+
 
     @PostMapping("/login")
     public String login(@RequestBody User user, HttpServletResponse response) {return userService.verify(user, response);}
@@ -36,6 +37,8 @@ public class UserController {
     public String LoggingOut(HttpServletResponse response){
         return userService.loggingOut(response);
     }
+
+
 
     @GetMapping("/logged")
     public boolean verifyingLogged(HttpServletRequest request){

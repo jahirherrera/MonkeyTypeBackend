@@ -39,7 +39,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf(customizer ->customizer.disable())
                 .cors(Customizer.withDefaults())//disable csrf
-                .authorizeHttpRequests(request -> request.requestMatchers("login","addUser","getResults","userLogOut").permitAll().anyRequest().authenticated())
+                .authorizeHttpRequests(request -> request.requestMatchers("login","verifying","sendingCode","addUser","getResults","userLogOut").permitAll().anyRequest().authenticated())
                 //.formLogin(Customizer.withDefaults())
 //                .httpBasic(Customizer.withDefaults())
                 .oauth2Login(oauth -> oauth.successHandler(onSuccessHandler))

@@ -32,6 +32,8 @@ public class OnSuccessHandler implements AuthenticationSuccessHandler {
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
 
         String email = oAuth2User.getAttribute("email");
+        if(email==null) return;
+
         String name = oAuth2User.getAttribute("name");
         String username = email.substring(0,email.indexOf("@"));   //jahir123@
 
